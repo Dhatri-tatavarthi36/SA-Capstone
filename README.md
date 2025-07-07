@@ -1,5 +1,3 @@
-# SA-Capstone
- Dynamic Pricing for Urban Parking Lots
 # 📌 Dynamic Pricing for Urban Parking Lots
 
 Capstone Project | Summer Analytics 2025
@@ -8,7 +6,7 @@ Capstone Project | Summer Analytics 2025
 
 ## 📖 Overview
 
-This project addresses the inefficiencies caused by static pricing in urban parking lots. We developed a dynamic, real-time pricing engine that updates parking fees based on demand, queue length, traffic conditions, special events, and competitor pricing. The solution uses real-time data streaming and logic-based modeling to improve parking lot utilization.
+This project addresses the inefficiencies caused by static pricing in urban parking lots. We developed a dynamic, real-time pricing engine that updates parking fees based on demand, queue length, traffic conditions, and special events. The solution uses real-time data streaming and logic-based modeling to improve parking lot utilization.
 
 ---
 
@@ -50,14 +48,19 @@ graph LR
 
 3. **Model 2 (Demand-Based)**:
 
-   * Adds queue length, traffic, event-day, and vehicle-type impact.
-   * Computes a normalized demand score.
-   * Final price is scaled smoothly between 0.5x and 2x base price.
+   * Constructs demand based on occupancy, queue length, traffic, special day, and vehicle type.
+
+   * Demand formula:
+
+     `Demand = α * (Occupancy / Capacity) + β * QueueLength - γ * Traffic + δ * IsSpecialDay + ε_vehicle`
+
+     `Price = BasePrice * (1 + λ * NormalizedDemand)`
+
+   * Normalized demand ensures smooth and bounded pricing (0.5x to 2x base).
 
 4. **Real-Time Windows**:
 
    * Daily tumbling windows used for smoothing fluctuations.
-   * Aggregates occupancy for dynamic adjustments.
 
 5. **Visualization**:
 
@@ -67,3 +70,13 @@ graph LR
 6. **Output**:
 
    * All processed results are streamed and saved to `parking_stream.csv`
+
+---
+
+## 📎 Documentation & References
+
+* [Pathway Developer Guide](https://pathway.com/developers/user-guide/introduction/first_realtime_app_with_pathway/)
+* [Bokeh Documentation](https://docs.bokeh.org/en/latest/index.html)
+* [Mermaid Live Editor](https://mermaid.live/edit)
+* Dataset provided by Consulting & Analytics Club, IIT Guwahati
+---
